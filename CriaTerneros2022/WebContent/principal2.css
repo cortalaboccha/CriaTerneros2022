@@ -1,0 +1,95 @@
+body {
+	background: url(Imagenes/fondoInicio.jpg) no-repeat center top;
+	background-size : cover;
+	color: #000000;
+	background-size: cover;
+}
+
+body .ui-toolbar {
+	color: #000000;
+}
+
+body:before {
+	backdrop-filter: blur(6px);
+}
+
+#checkUsu{
+	width: 1.5em !important;
+	}
+
+@media ( min-width : 825px) {
+	#cardMov {
+		display: none !important;
+	}
+	
+}
+
+@media ( max-width : 825px) {
+	#cardWeb {
+		display: none !important;	
+	}
+body{
+	background: #3A496B;
+	}
+
+}
+
+.ui-toolbar {
+    border: none;
+    background: white !important;
+    color: black !important;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.ui-menubar {
+	background-color: white !important;
+	background: white;
+	border: none !important;
+}
+
+.ui-menu .ui-menuitem-text {
+    font-family: ui-monospace;
+    float: left;
+    font-size: 1.2em;
+}
+
+.ui-menu .ui-menuitem .ui-state-hover{
+background: darkolivegreen !important;
+color: white !important;
+}
+
+.ui-menu .ui-menuitem-link {
+    font-weight: 650 !important;
+}
+
+.ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-text {
+    float: none;
+    vertical-align: middle;
+    color: #000000!important;
+    font: bold !important;
+
+}
+
+
+.ui-datatable .ui-datatable-header {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-width: 1px 0 1px 0;
+    color: black !important;
+    padding: 1rem 1rem;
+    font-weight: 600;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.ui-datatable thead th {
+    background: #f8f9fa;
+    color: black !important;
+    padding: 1rem 1rem;
+    border: 1px solid #e9ecef;
+    border-width: 0 0 1px 0;
+    text-align: left;
+    box-sizing: content-box;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}

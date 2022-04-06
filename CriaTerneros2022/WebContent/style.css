@@ -1,0 +1,115 @@
+*{ 	
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+list-style: none;
+text-decoration: none;
+/* font-family: ‘Montserrat’, sans-serif; */
+}
+
+
+body{
+font-family: ‘Montserrat’, sans-serif;
+background: url(../Imagenes/fondoPrincipal.jpg) no-repeat center top; 
+background-size: cover; 
+}
+nav{
+background: #065446;
+height: 80px;
+width: 100%;
+}
+label.logo{
+color: white;
+font-size: 35px;
+line-height: 80px;
+font-weight: 600;
+padding: 0 100px;
+cursor: pointer;
+}
+nav ul{
+float: right;
+margin-right: 20px;
+}
+nav ul li{
+display: inline-block;
+line-height: 80px;
+margin: 0 5px;
+}
+nav ul li a{
+color: #FADCAC;
+font-size: 17px;
+padding: 7px 17px;
+border-radius: 3px;
+text-transform: uppercase;
+font-weight: 600;
+}
+
+
+
+a.active,a:hover{
+background: #158467;
+transition: .5s;
+}
+.check-btn{
+color: white;
+font-size: 30px;
+float: right;
+line-height: 80px;
+margin-right: 40px;
+cursor: pointer;
+display: none;
+}
+#check{
+display: none;
+}
+@media (max-width: 952px){
+label.logo{
+font-size: 30px;
+padding-left: 50px;
+}
+nav ul li a{
+font-size: 16px;
+}
+@media (max-width: 952px){
+body{
+background: #FADCAC;
+}
+}
+@media (max-width: 858px){
+.check-btn{
+display: block;
+}
+ul{
+position: fixed;
+height: 100vh;
+width: 100%;
+background: #197163;
+top: 80px;
+left: -100%;
+text-align: center;
+transition: all .5s;
+}
+nav ul li{
+display: block;
+margin: 50px 0;
+line-height: 30px;
+}
+nav ul li a{
+font-size: 20px;
+}
+a:hover,a.active{
+background: none;
+color: #158467;
+}
+#check:checked ~ ul{
+left: 0;
+}
+}
+main{
+background: url(../Imagenes/fondoPrincipal.jpg) no-repeat center top; 
+background-size: cover; 
+height: 100%;
+width: 100%;
+}
+}

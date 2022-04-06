@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+ <link rel="stylesheet" href="Iniciar.css"></link>
+ <h:head>
+
+	<title>Pagina de Inicio</title>
+ </h:head>
+ 
+<body >
+
+
+	<h:form id="loginForm">
+		<p:growl id="msg" showDetail="true" life="4000" />
+		<p:panel id="loginPnl" header="Iniciar Sesión"
+			style="width: 350px; margin: 0 auto;">
+			 <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="username" value="Usuario:" />
+            <p:inputText id="username" label="username" />
+             
+            <h:outputLabel for="password" value="Contraseña:" />
+            <p:password id="password"  label="password" />
+             
+            <f:facet name="footer">
+                <p:commandButton value="Ingresar" action="#{loginControlNamed.ingresar()}" ajax="false"/>
+            </f:facet>  
+        </h:panelGrid>
+		</p:panel>
+	</h:form>
+</body>
+</html>
+

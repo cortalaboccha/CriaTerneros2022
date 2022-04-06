@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" href="principal2.css"></link>
+
+<h:head>
+	<meta charset="UTF-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+	<title>Crece Terneros</title>
+</h:head>
+<body>
+
+
+	<div id="cardWeb" class="card">
+		<h:form>
+			<p:growl id="messages" />
+
+
+			<p:toolbar styleClass="ui-toolbar">
+				<p:toolbarGroup>
+					<h:graphicImage value="/Imagenes/logoWeb.jpg"
+						style="margin-left: 3em; " width="230px"></h:graphicImage>
+				</p:toolbarGroup>
+				<p:toolbarGroup>
+					<p:menubar id="no" styleClass="ui-menubar" autoDisplay="true">
+						<p:menuitem>
+
+						</p:menuitem>
+						<p:menuitem id="mnUsu" value="Usuario"
+							outcome="Usuarios.xhtml" />
+						<p:menuitem id="mnTer" value="Terneros" outcome="Terneros.xhtml" />
+						<p:menuitem id="mnGua" value="Guacheras" outcome="Guacheras.xhtml" />
+						<p:menuitem id="mnEng" value="Enfermedades"
+							outcome="Enfermedades.xhtml" />
+						<p:menuitem id="mnAli" value="Alimentos" />
+						<p:menuitem id="mnInf" value="Informes" />
+
+					</p:menubar>
+				</p:toolbarGroup>
+				<p:toolbarGroup>
+					<p:button value="Cerrar Sesión" icon="pi pi-fw pi-sign-out"
+						styleClass="ui-button-info" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+
+
+
+
+		</h:form>
+	</div>
+
+	<div id="cardMov" class="card">
+		<h:form>
+			<p:growl id="messages" showDetail="true" />
+
+
+			<p:tieredMenu style="width:200px">
+
+
+				<p:menuitem>
+					<h:graphicImage value="/Imagenes/CT-MOV.png" style=" width: -webkit-fill-available;" ></h:graphicImage>
+				</p:menuitem>
+
+				<p:menuitem id="mnUsu" value="Usuario"
+					outcome="Usuarios.xhtml" />
+				<p:menuitem id="mnTer" value="Terneros" outcome="Terneros.xhtml" />
+				<p:menuitem id="mnGua" value="Guacheras" outcome="Guacheras.xhtml" />
+				<p:menuitem id="mnEng" value="Enfermedades"
+					outcome="Enfermedades.xhtml" />
+				<p:menuitem id="mnAli" value="Alimentos" />
+				<p:menuitem id="mnInf" value="Informes" />
+
+
+
+
+
+
+				<f:facet name="options">
+					<p:button style="margin-left: 1.7em;
+    margin-top: 2em;" value="Cerrar Sesión"
+						icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" />
+				</f:facet>
+			</p:tieredMenu>
+		</h:form>
+	</div>
+
+
+</body>
+
+</html>

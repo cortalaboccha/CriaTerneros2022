@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" href="principal2.css"></link>
+
+<h:head>
+	<title>Usuarios</title>
+</h:head>
+<body>
+	<h:form id="form">
+		<div class="card crud-demo">
+			<p:growl id="messages" showDetail="true" />
+
+			<p:toolbar styleClass="ui-toolbar">
+		
+				<p:toolbarGroup>
+					<p:commandButton value="Nuevo" icon="pi pi-plus"
+						actionListener="#{usuarioControlNamed.openNew()}"
+						update=":form:manage-usuario-content"
+						oncomplete="PF('manageUsuarioDialog').show()"
+						styleClass="ui-button-success" style="margin-right: .5rem">
+						<p:resetInput target=":form:manage-usuario-content" />
+					</p:commandButton>
+					<p:commandButton id="delete-usuarios-button"
+						value="#{usuarioControlNamed.deleteButtonMessage}"
+						icon="pi pi-trash" styleClass="ui-button-danger"
+						actionListener="usuarioControlNamed.eliminar()"
+						disabled="#{!usuarioControlNamed.hasSelectedUsuarios()}"
+						update="@this">
+						<p:confirm header="Confirmar"
+							message="Eliminar usuario seleccionado?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<span style="font-weight: bold; margin-right: 2em;">MANTENIMIENTO DE USUARIOS</span>
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<br></br>
+
+			<p:dataTable id="dt-Usuarios" widgetVar="dtUsuarios" var="u"
+				value="#{usuarioControlNamed.usuarios}" reflow="true"
+				styleClass="Usuarios-table"
+				selection="#{usuarioControlNamed.seleccionados}" rowKey="#{u.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
+				<f:facet name="header">
+					<div class="Usuarios-table-header">
+						<span style="font-weight: bold; margin-right: 1em;">USUARIOS</span>
+						<span class="filter-container ui-input-icon-left"> <i
+							class="pi pi-search"></i> <p:inputText id="globalFilter"
+								onkeyup="PF('dtUsuarios').filter()" placeholder="Buscar" />
+						</span>
+
+					</div>
+				</f:facet>
+
+				<p:ajax event="rowSelect" update=":form:delete-usuarios-button" />
+				<p:ajax event="rowUnselect" update=":form:delete-usuarios-button" />
+				<p:ajax event="rowSelectCheckbox"
+					update=":form:delete-usuarios-button" />
+				<p:ajax event="rowUnselectCheckbox"
+					update=":form:delete-usuarios-button" />
+				<p:ajax event="toggleSelect" update=":form:delete-usuarios-button" />
+
+				<p:column id="checkUsu" selectionMode="multiple" exportable="false"></p:column>
+
+				<p:column headerText="Id Usuario" sortBy="#{u.id}"
+					filterBy="#{u.id}">
+					<h:outputText value="#{u.id}" />
+				</p:column>
+			
+				<p:column headerText="Nombre" sortBy="#{u.nombre}"
+					filterBy="#{u.nombre}">
+					<h:outputText value="#{u.nombre}" id="fecha" />
+				</p:column>
+				
+				<p:column headerText="Nombre Acceso" exportable="false">
+					<h:outputText value="#{u.nomAcc}" />
+				</p:column>
+				
+				<p:column headerText="Contraseña" exportable="false">
+					<h:outputText value="#{u.contra}" />
+				</p:column>
+				
+				<p:column headerText="Cedula" sortBy="#{u.cedula}"
+					filterBy="#{u.cedula}">
+					<h:outputText value="#{u.cedula}" />
+				</p:column>
+				
+				<p:column headerText="Apellido" exportable="false">
+					<h:outputText value="#{u.apellido}" />
+				</p:column>
+				<p:column headerText="Mail" sortBy="#{u.mail}">
+					<h:outputText value="#{u.mail}" style="font-weight: 700">
+
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Telefono" sortBy="#{u.telefono}">
+					<h:outputText value="#{u.telefono}" readonly="true" />
+				</p:column>
+
+				<p:column exportable="false" style="width: 5.5em">
+					<p:commandButton icon="pi pi-pencil"
+						update=":form:manage-usuario-content"
+						oncomplete="PF('manageUsuarioDialog').show()"
+						styleClass="edit-button rounded-button ui-button-warning"
+						process="@this">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{usuarioControlNamed.selectedUsuario}" />
+						<p:resetInput target=":form:manage-usuario-content" />
+					</p:commandButton>
+					<p:commandButton styleClass="rounded-button ui-button-danger"
+						icon="pi pi-trash" process="@this"
+						oncomplete="PF('deleteUsuarioDialog').show()">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{usuarioControlNamed.selectedUsuario}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+
+
+			<p:dialog header="Datos Usuario" showEffect="fade" modal="true"
+				widgetVar="manageUsuarioDialog" responsive="true"
+				styleClass="ui-button-outlined" blockScroll="true"
+				style="overflow: scroll;
+    max-height: 80%;">
+				<p:outputPanel id="manage-usuario-content" class="ui-fluid">
+					<p:outputPanel
+						rendered="#{not empty usuarioControlNamed.selectedUsuario}">
+						<p:divider align="center">
+							<span class="ui-tag">Datos</span>
+						</p:divider>
+
+
+
+
+						<div class="p-field">
+							<p:outputLabel for="nombre">Nombre</p:outputLabel>
+							<p:inputText id="nombre"
+								value="#{usuarioControlNamed.selectedUsuario.nombre}" />
+						</div>
+
+						<div class="p-field">
+
+							<p:outputLabel for="apellido">Apellido</p:outputLabel>
+							<p:inputText id="apellido"
+								value="#{usuarioControlNamed.selectedUsuario.apellido}" />
+						</div>
+						
+						<div class="p-field">
+
+							<p:outputLabel for="nomAcc">Nombre Acceso</p:outputLabel>
+							<p:inputText id="nomAcc"
+								value="#{usuarioControlNamed.selectedUsuario.nomAcc}" />
+						</div>
+						
+						<div class="p-field">
+
+							<p:outputLabel for="contra">Contraseña</p:outputLabel>
+							<p:inputText id="contra"
+								value="#{usuarioControlNamed.selectedUsuario.contra}" />
+						</div>
+						
+						<div class="p-field">
+							<p:outputLabel for="mail">Mail</p:outputLabel>
+							<p:inputText id="mail"
+								value="#{usuarioControlNamed.selectedUsuario.mail}" />
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="tel">Telefono</p:outputLabel>
+							<p:inputText id="tel"
+								value="#{usuarioControlNamed.selectedUsuario.telefono}" />
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="ci">Cedula Identidad</p:outputLabel>
+							<p:inputText id="ci"
+								value="#{usuarioControlNamed.selectedUsuario.cedula}" />
+						</div>
+						<div class="p-field"></div>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+				<f:facet name="footer">
+					<p:commandButton value="Guardar" icon="pi pi-check"
+						actionListener="#{usuarioControlNamed.crear()}" update="form"
+						process="manage-usuario-content @this" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('manageUsuarioDialog').hide()"
+						update="manage-usuario-content" class="ui-button-secondary" />
+				</f:facet>
+			</p:dialog>
+
+
+			<p:confirmDialog  widgetVar="deleteUsuarioDialog" showEffect="fade"
+				width="300" message="Eliminar este Usuario?" header="Confirmar"
+				severity="warn">
+				<p:commandButton value="Sí" icon="pi pi-check"
+					actionListener="#{usuarioControlNamed.eliminar()}" process="@this"
+					oncomplete="PF('deleteUsuarioDialog').hide()" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-button-secondary" icon="pi pi-times"
+					onclick="PF('deleteUsuarioDialog').hide()" />
+			</p:confirmDialog>
+
+			<p:confirmDialog global="true" showEffect="fade" width="300">
+				<p:commandButton value="Sí" type="button"
+					styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no ui-button-secondary"
+					icon="pi pi-times" />
+			</p:confirmDialog>
+
+			<br></br>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Atrás" icon="pi pi-undo" onclick="window.history.back();" styleClass="ui-button-secondary"
+						style="margin-right: .5rem">
+					</p:commandButton>
+
+				</p:toolbarGroup>
+			</p:toolbar>
+
+		</div>
+	</h:form>
+</body>
+</html>

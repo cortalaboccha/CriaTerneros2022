@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    
+   <f:event  listener="#{ControlLogin.verificarSession}" type="preRenderComponent" />
+   
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
+        <title>Cheese</title>
+        <meta name="description" content=""></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="manifest" href="site.webmanifest"></link>
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"></link>
+		
+		
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="../assets/css/bootstrap.min.css"></link>
+            <link rel="stylesheet" href="../assets/css/owl.carousel.min.css"></link>
+            <link rel="stylesheet" href="../assets/css/flaticon.css"></link>
+            <link rel="stylesheet" href="../assets/css/slicknav.css"></link>
+            <link rel="stylesheet" href="../assets/css/animate.min.css"></link>
+            <link rel="stylesheet" href="../assets/css/magnific-popup.css"></link>
+            <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css"></link>
+            <link rel="stylesheet" href="../assets/css/themify-icons.css"></link>
+            <link rel="stylesheet" href="../assets/css/slick.css"></link>
+            <link rel="stylesheet" href="../assets/css/nice-select.css"></link>
+            <link rel="stylesheet" type="text/css" href="../CSS/Principal.css"></link>
+            
+            <link rel="stylesheet" href="../assets/css/style.css"></link>
+            
+
+	<script src="../js/jquery-3.6.0.min.js" type="text/javascript"></script>
+	<script src="../js/menu.js"></script>
+	<script src="../js/pie.js"></script>
+            
+   </h:head>
+
+<body>
+    <header>
+			
+			<div id="menu"></div>
+					
+		</header>
+    <main>
+           
+<div id="btnCS">
+           <p:growl showDetail="true" id="msg" />
+
+			<h:form>
+
+				<p:commandButton id="btncerrar" action="#{ControlLogin.cerrarSesion}"
+					icon="pi pi-sign-out" value="Cerrar Sesión">
+					<p:confirm icon="pi pi-exclamation-triangle"
+						message="Estas seguro desea Cerrar Sesión?"
+						header="Confirmar" />
+				</p:commandButton>
+
+				<p:confirmDialog hideEffect="fade" showEffect="fade" global="true">
+					<p:commandButton icon="pi pi-check" value="Sí"
+						styleClass="ui-confirmdialog-yes" type="button" />
+					<p:commandButton icon="pi pi-times" value="No"
+						styleClass="ui-confirmdialog-no" type="button" />
+				</p:confirmDialog>
+			</h:form>
+
+		</div>
+        
+
+    </main>
+    
+    <footer>
+    
+    <div id="pie"></div>
+    
+    </footer>
+        
+    </body>
+</html>

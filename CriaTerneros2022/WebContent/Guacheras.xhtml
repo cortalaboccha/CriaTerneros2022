@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<link rel="stylesheet" href="principal2.css"></link>
+
+<h:head>
+<title>Guacheras</title>
+</h:head>
+<body>
+	<h:form id="form">
+		<div class="card crud-demo">
+			<p:growl id="messages" showDetail="true" />
+
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Nuevo" icon="pi pi-plus"
+						actionListener="#{crudViewG.openNew}"
+						update=":form:manage-Guachera-content"
+						oncomplete="PF('manageGuacheraDialog').show()"
+						styleClass="ui-button-success" style="margin-right: .5rem">
+						<p:resetInput target=":form:manage-Guachera-content" />
+					</p:commandButton>
+					<p:commandButton id="delete-Guacheras-button"
+						value="#{crudViewG.deleteButtonMessage}" icon="pi pi-trash"
+						actionListener="#{crudViewG.deleteSelectedGuacheras}"
+						styleClass="ui-button-danger"
+						disabled="#{!crudViewG.hasSelectedGuacheras()}" update="@this">
+						<p:confirm header="Confirmation"
+							message="Delete the selected Guacheras?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:fileUpload mode="simple" skinSimple="true" label="Import"
+						chooseIcon="pi pi-download" />
+					<p:commandButton value="Export" icon="pi pi-upload"
+						styleClass="ui-button-help" ajax="false">
+						<p:dataExporter type="pdf" target="dt-Guacheras"
+							fileName="Guacheras" />
+					</p:commandButton>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+<br></br>
+
+			<p:dataTable id="dt-Guacheras" widgetVar="dtGuacherasGuacheras" var="Guachera"
+				value="#{crudViewG.guacheras}" reflow="true"
+				styleClass="Guacheras-table" selection="#{crudViewG.selectedGuacheras}"
+				rowKey="#{Guachera.id}" paginator="true" rows="10"
+				rowSelectMode="add" paginatorPosition="bottom">
+				<f:facet name="header">
+					<div class="Guacheras-table-header">
+						<span style="font-weight: bold">GUACHERAS	</span> <span
+							class="filter-container ui-input-icon-left"> <i
+							class="pi pi-search"></i> <p:inputText id="globalFilter"
+								onkeyup="PF('dtGuacheras').filter()" placeholder="Buscar" />
+						</span>
+
+					</div>
+				</f:facet>
+
+				<p:ajax event="rowSelect" update=":form:delete-Guacheras-button" />
+				<p:ajax event="rowUnselect" update=":form:delete-Guacheras-button" />
+				<p:ajax event="rowSelectCheckbox"
+					update=":form:delete-Guacheras-button" />
+				<p:ajax event="rowUnselectCheckbox"
+					update=":form:delete-Guacheras-button" />
+				<p:ajax event="toggleSelect" update=":form:delete-Guacheras-button" />
+
+				<p:column selectionMode="multiple" exportable="false"></p:column>
+
+				<p:column headerText="Nro Guachera" sortBy="#{Guachera.nroGuachera}"
+					filterBy="#{Guachera.nroGuachera}">
+					<h:outputText value="#{Guachera.nroGuachera}" />
+				</p:column>
+				 
+				<p:column headerText="Individual" exportable="false">
+					<h:outputText value="#{Guachera.individual}" />
+				</p:column>
+				
+				<p:column headerText="Colectiva" exportable="false">
+					<h:outputText value="#{Guachera.colectiva}" />
+				</p:column>
+				
+
+				<p:column exportable="false">
+					<p:commandButton icon="pi pi-pencil"
+						update=":form:manage-Guachera-content"
+						oncomplete="PF('manageGuacheraDialog').show()"
+						styleClass="edit-button rounded-button ui-button-success"
+						process="@this">
+						<f:setPropertyActionListener value="#{Guachera}"
+							target="#{crudViewG.selectedGuachera}" />
+						<p:resetInput target=":form:manage-Guachera-content" />
+					</p:commandButton>
+					<p:commandButton class="ui-button-warning rounded-button"
+						icon="pi pi-trash" process="@this"
+						oncomplete="PF('deleteGuacheraDialog').show()">
+						<f:setPropertyActionListener value="#{Guachera}"
+							target="#{crudViewG.selectedGuachera}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+
+
+			<p:dialog header="Nuevo Guachera" showEffect="fade" modal="true"
+				widgetVar="manageGuacheraDialog" responsive="true"
+				styleClass="ui-button-outlined" blockScroll="true"
+				style="overflow: scroll;
+    max-height: 80%;">
+				<p:outputPanel id="manage-Guachera-content" class="ui-fluid">
+
+					<p:outputPanel rendered="#{not empty crudViewG.selectedGuachera}">
+
+						<p:divider align="center">
+							<span class="ui-tag">Nacimiento</span>
+						</p:divider>
+						<div class="p-field">
+							<p:outputLabel for="name">Nro Guachera</p:outputLabel>
+							<p:inputText id="name" value="#{crudViewG.selectedGuachera.nroGuachera}"
+								required="true" />
+						</div>
+
+						
+
+						<div class="p-field">
+							<p:outputLabel for="indi">Individual</p:outputLabel>
+							<p:selectOneRadio id="indi" layout="responsive" columns="2">
+								<f:selectItem itemLabel="Estaca" itemValue="Estaca" />
+								<f:selectItem itemLabel="Jaula" itemValue="Jaula" />
+							</p:selectOneRadio>
+						</div>
+						
+						<div class="p-field">
+							<p:outputLabel for="cole">Colectiva</p:outputLabel>
+							<p:selectOneRadio id="cole" layout="responsive" columns="2">
+								<f:selectItem itemLabel="Galpon" itemValue="Galpon" />
+							</p:selectOneRadio>
+						</div>
+						
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+				<f:facet name="footer">
+					<p:commandButton value="Guardar" icon="pi pi-check"
+						actionListener="#{crudViewG.saveGuachera}"
+						update="manage-Guachera-content"
+						process="manage-Guachera-content @this" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('manageGuacheraDialog').hide()"
+						class="ui-button-secondary" />
+				</f:facet>
+			</p:dialog>
+
+
+			<p:confirmDialog widgetVar="deleteGuacheraDialog" showEffect="fade"
+				width="300" message="Eliminar este Guachera?" header="Confirmar"
+				severity="warn">
+				<p:commandButton value="Sí" icon="pi pi-check"
+					actionListener="#{crudViewG.deleteGuachera}" process="@this"
+					oncomplete="PF('deleteGuacheraDialog').hide()" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-button-secondary" icon="pi pi-times"
+					onclick="PF('deleteGuacheraDialog').hide()" />
+			</p:confirmDialog>
+
+			<p:confirmDialog global="true" showEffect="fade" width="300">
+				<p:commandButton value="Sí" type="button"
+					styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no ui-button-secondary"
+					icon="pi pi-times" />
+			</p:confirmDialog>
+			
+			<br></br>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Atrás" icon="pi pi-undo" action="CriaT.xhtml"
+						styleClass="ui-button-secondary" style="margin-right: .5rem">
+					</p:commandButton>
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+		</div>
+	</h:form>
+</body>
+</html>
