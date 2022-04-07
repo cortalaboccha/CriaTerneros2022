@@ -10,16 +10,15 @@ import Entidades.Enfermedad;
 public interface EnfermedadEJBLocal {
 	
 	
-void crear(Enfermedad enfermedad);
-	
-	void editar(Enfermedad enfermedad);
-	
-	void eliminar(Enfermedad enfermedad);
-	
-	Enfermedad find(Object id);
-	
-	List<Enfermedad> findAll();
-	
-	int count();
+		
+		void crear(Enfermedad enfermedad);
+		
+		void editar(Enfermedad enfermedad);
+		
+		void remove(Enfermedad enfermedad);
+		
+		Enfermedad find(Object id);
+		
+		List<Enfermedad> findAll();
 
 }

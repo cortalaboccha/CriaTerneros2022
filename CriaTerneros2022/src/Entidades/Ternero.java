@@ -39,7 +39,7 @@ public class Ternero implements Serializable {
     private double peso;
     
     //calostrado
-	@Column(nullable = false, name= "canCal")
+	@Column(nullable = false, name= "cantCal")
     private double cantCal;
 	@Column(nullable = false, name= "tiempo")
     private int tiempo;

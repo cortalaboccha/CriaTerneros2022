@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -16,6 +17,7 @@ import EJB.TerneroEJBLocal;
 import Entidades.Ternero;
 @Named("terneroControlNamed")
 @ViewScoped
+
 public class TerneroControl implements Serializable {
 
 	/**

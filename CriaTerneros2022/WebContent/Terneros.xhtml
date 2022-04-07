@@ -26,10 +26,12 @@
 						<p:resetInput target=":form:manage-Ternero-content" />
 					</p:commandButton>
 					<p:commandButton id="delete-Terneros-button"
-						value="#{terneroControlNamed.deleteButtonMessage}" icon="pi pi-trash"
+						value="#{terneroControlNamed.deleteButtonMessage}"
+						icon="pi pi-trash"
 						actionListener="#{terneroControlNamed.deleteSelectedTerneros}"
 						styleClass="ui-button-danger"
-						disabled="#{!terneroControlNamed.hasSelectedTerneros()}" update="@this">
+						disabled="#{!terneroControlNamed.hasSelectedTerneros()}"
+						update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected Terneros?"
 							icon="pi pi-exclamation-triangle" />
@@ -48,8 +50,8 @@
 			<br></br>
 
 
-			<p:dataTable id="dt-Terneros" widgetVar="dtTerneros"
-				var="t" value="#{terneroControlNamed.terneros}" reflow="true"
+			<p:dataTable id="dt-Terneros" widgetVar="dtTerneros" var="t"
+				value="#{terneroControlNamed.terneros}" reflow="true"
 				styleClass="Terneros-table"
 				selection="#{terneroControlNamed.seleccionados}" rowKey="#{t.id}"
 				paginator="true" rows="10" rowSelectMode="add"
@@ -65,11 +67,13 @@
 					</div>
 				</f:facet>
 
-				<p:ajax event="rowSelect"           update=":form:delete-Terneros-button" />
-				<p:ajax event="rowUnselect"         update=":form:delete-Terneros-button" />
-				<p:ajax event="rowSelectCheckbox"   update=":form:delete-Terneros-button" />
-				<p:ajax event="rowUnselectCheckbox" update=":form:delete-Terneros-button" />
-				<p:ajax event="toggleSelect"        update=":form:delete-Terneros-button" />
+				<p:ajax event="rowSelect" update=":form:delete-Terneros-button" />
+				<p:ajax event="rowUnselect" update=":form:delete-Terneros-button" />
+				<p:ajax event="rowSelectCheckbox"
+					update=":form:delete-Terneros-button" />
+				<p:ajax event="rowUnselectCheckbox"
+					update=":form:delete-Terneros-button" />
+				<p:ajax event="toggleSelect" update=":form:delete-Terneros-button" />
 
 				<p:column selectionMode="multiple" exportable="false"></p:column>
 
@@ -78,29 +82,48 @@
 					<h:outputText value="#{t.nroTernero}" />
 				</p:column>
 				<p:column headerText="Image" exportable="false">
-                <h:graphicImage name="Imagenes/#{t.imagen}"/>
-            </p:column>
-				<p:column headerText="Fecha Nacimiento" sortBy="#{t.fechaNac}"
-					filterBy="#{t.fechaNac}">
-					<h:outputText
-						value="#{formatFechas.convertirFecha(t.fechaNac)}"
-						id="fecha" />
+					<h:graphicImage name="Imagenes/CT-MOV.png" />
+				</p:column>
+				<p:column headerText="Fecha Nacimiento" sortBy="#{t.fechaNac}">
+					<h:outputText value="#{t.fechaNac}" id="fecha">
+						<f:convertDateTime type="date" timeZone="CST" pattern="dd/MM/yyyy" />
+					</h:outputText>
 				</p:column>
 				<p:column headerText="Parto" exportable="false">
 					<h:outputText value="#{t.parto}" />
 				</p:column>
 				<p:column headerText="Peso" sortBy="#{t.peso}">
 					<h:outputText value="#{t.peso}" style="font-weight: 700">
-
 					</h:outputText>
 				</p:column>
-				<p:column headerText="Peso" sortBy="#{t.peso}"
-					filterBy="#{t.peso}">
-					<h:outputText value="#{t.peso}" />
+				<p:column headerText="Calostro" sortBy="#{t.cantCal}">
+					<h:outputText value="#{t.cantCal}" style="font-weight: 700">
+					</h:outputText>
 				</p:column>
-				<p:column headerText="Parto" sortBy="#{t.parto}">
-					<h:outputText value="#{t.parto}" readonly="true" />
+				<p:column headerText="Inicio Calostro" sortBy="#{t.tiempo}">
+					<h:outputText value="#{t.tiempo}" style="font-weight: 700">
+					</h:outputText>
 				</p:column>
+				<p:column headerText="Fecha refractometria" sortBy="#{t.fechaRef}">
+					<h:outputText value="#{t.fechaRef}" style="font-weight: 700">
+						<f:convertDateTime type="date" timeZone="CST" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Valor refractometria" sortBy="#{t.valor}">
+					<h:outputText value="#{t.valor}" style="font-weight: 700">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Fecha destete" sortBy="#{t.fechaDes}">
+					<h:outputText value="#{t.fechaDes}" style="font-weight: 700">
+						<f:convertDateTime type="date" timeZone="CST" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Altura destete" sortBy="#{t.altura}">
+					<h:outputText value="#{t.altura}" style="font-weight: 700">
+					</h:outputText>
+				</p:column>
+
 
 				<p:column exportable="false">
 					<p:commandButton icon="pi pi-pencil"
@@ -131,10 +154,9 @@
     max-height: 80%;">
 				<p:outputPanel id="manage-Ternero-content" class="ui-fluid">
 
-					<p:outputPanel >
-						<p:graphicImage
-							name="Imagenes/ternero.png"
-							library="demo" styleClass="Ternero-image"
+					<p:outputPanel>
+						<p:graphicImage name="Imagenes/ternero.png" library="demo"
+							styleClass="Ternero-image"
 							rendered="#{not empty crudView.selectedProduct.image}" />
 						<p:divider align="center">
 							<span class="ui-tag">Nacimiento</span>
@@ -142,23 +164,32 @@
 						<div class="p-field">
 							<p:outputLabel for="name">Nro Ternero</p:outputLabel>
 							<p:inputText id="name"
-								value="#{terneroControl.ternero.nroTernero}" required="true" />
-						</div>
-
+								value="#{terneroControl.ternero.nroTernero}" required="false" />
 						
-
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="name">Fecha Nacimiento</p:outputLabel>
+								<p:datePicker id="name" value="#{terneroControl.ternero.fechaNac}" required="false" showon="button" />
+						</div>
+						
 						<div class="p-field">
 							<p:outputLabel for="category">Parto</p:outputLabel>
-							<p:selectOneRadio id="category" layout="responsive" columns="2">
+							<p:selectOneRadio id="category"
+								value="#{terneroControl.ternero.parto}" layout="responsive"
+								columns="2">
 								<f:selectItem itemLabel="Normal" itemValue="Normal" />
 								<f:selectItem itemLabel="Asistido" itemValue="Asistido" />
 							</p:selectOneRadio>
 						</div>
+						<div>
+							<p:outputLabel for="peso">Peso(Kg)</p:outputLabel>
+							<p:inputText id="peso" value="#{terneroControl.ternero.peso}"
+								required="true" />
+						</div>
 						<div class="p-formgrid p-grid">
 							<div class="p-field p-col">
 								<p:outputLabel for="price">Sexo</p:outputLabel>
-								<p:inputText id="price"
-									value="#{terneroControl.ternero.valor}"/>
+								<p:inputText id="price" value="#{terneroControl.ternero.valor}" />
 							</div>
 							<div class="p-field p-col">
 								<p:outputLabel for="quantity">Guachera</p:outputLabel>
@@ -175,27 +206,35 @@
 							value="#{terneroControl.ternero.cantCal}" required="true" />
 
 						<p:outputLabel for="tiempo">Tiempo/Nacimiento</p:outputLabel>
-						<p:inputText id="tiempo"
-							value="#{terneroControl.ternero.tiempo}" required="true" />
+						<p:inputText id="tiempo" value="#{terneroControl.ternero.tiempo}"
+							required="true" />
 
 						<p:divider align="center">
 							<span class="ui-tag">Refractrometria</span>
 						</p:divider>
-						
+
 						<p:outputLabel for="valor">Valor</p:outputLabel>
 						<p:inputText id="valor" value="#{terneroControl.ternero.valor}"
 							required="true" />
+							
+							<p:outputLabel for="valor">Fecha</p:outputLabel>
+							<p:calendar id="name"
+								value="#{terneroControl.ternero.fechaRef}" required="false" showon="button" />
+							
 
 						<p:divider align="center">
 							<span class="ui-tag">Desleche</span>
+							
 						</p:divider>
-						
-						<p:outputLabel for="peso">Peso(Kg)</p:outputLabel>
-						<p:inputText id="peso" value="#{terneroControl.ternero.peso}"
+							<p:outputLabel for="valor">Fecha</p:outputLabel>
+							<p:inputText id="valor" value="#{terneroControl.ternero.fechaDes}"
 							required="true" />
+						<p:outputLabel for="pesodest">Peso(Kg)</p:outputLabel>
+						<p:inputText id="pesodest"
+							value="#{terneroControl.ternero.pesoDes}" required="true" />
 						<p:outputLabel for="altura">Altura</p:outputLabel>
-						<p:inputText id="altura"
-							value="#{terneroControl.ternero.altura}" required="true" />
+						<p:inputText id="altura" value="#{terneroControl.ternero.altura}"
+							required="true" />
 
 
 
@@ -220,8 +259,8 @@
 				width="300" message="Eliminar este Ternero?" header="Confirmar"
 				severity="warn">
 				<p:commandButton value="Sí" icon="pi pi-check"
-					actionListener="#{terneroControlNamed.deleteTernero}" process="@this"
-					oncomplete="PF('deleteTerneroDialog').hide()" />
+					actionListener="#{terneroControlNamed.deleteTernero}"
+					process="@this" oncomplete="PF('deleteTerneroDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"
 					onclick="PF('deleteTerneroDialog').hide()" />
@@ -236,15 +275,16 @@
 			</p:confirmDialog>
 
 			<br></br>
+
 			<p:toolbar>
 				<p:toolbarGroup>
-					<p:commandButton value="Atrás" icon="pi pi-undo" action="#{terneroControlNamed.atras()}"
-						styleClass="ui-button-secondary" style="margin-right: .5rem">
+					<p:commandButton value="Atrás" icon="pi pi-undo"
+						onclick="window.history.back();" styleClass="ui-button-secondary"
+						style="margin-right: .5rem">
 					</p:commandButton>
 
 				</p:toolbarGroup>
 			</p:toolbar>
-
 
 		</div>
 	</h:form>
