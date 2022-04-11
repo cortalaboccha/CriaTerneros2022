@@ -154,11 +154,12 @@
     max-height: 80%;">
 				<p:outputPanel id="manage-Ternero-content" class="ui-fluid">
 
-					<p:outputPanel>
-						<p:graphicImage name="Imagenes/ternero.png" library="demo"
-							styleClass="Ternero-image"
-							rendered="#{not empty crudView.selectedProduct.image}" />
+					
+					 <p:outputPanel
+						rendered="#{not empty terneroControlNamed.selectedTernero}">
 						<p:divider align="center">
+						
+						
 							<span class="ui-tag">Nacimiento</span>
 						</p:divider>
 						<div class="p-field">
@@ -167,14 +168,17 @@
 								value="#{terneroControl.ternero.nroTernero}" required="false" />
 						
 						</div>
+						 <div class="p-field p-col-12 p-md-4">
+                <p:outputLabel for="fechaN" >Fecha Nacimiento</p:outputLabel>
+                
+							<p:calendar id="fechaNac" value="#{terneroControl.ternero.fechaNac}"
+				navigator="true" pattern="dd/MM/yyyy" required="true"
+				requiredMessage="***Fecha de Nacimiento es requerida***"
+				readonlyInput="true" showOn="button" title="Fecha Nacimiento"></p:calendar>
+				</div>
 						<div class="p-field">
-							<p:outputLabel for="name">Fecha Nacimiento</p:outputLabel>
-								<p:datePicker id="name" value="#{terneroControl.ternero.fechaNac}" required="false" showon="button" />
-						</div>
-						
-						<div class="p-field">
-							<p:outputLabel for="category">Parto</p:outputLabel>
-							<p:selectOneRadio id="category"
+							<p:outputLabel for="parto">Parto</p:outputLabel>
+							<p:selectOneRadio id="parto"
 								value="#{terneroControl.ternero.parto}" layout="responsive"
 								columns="2">
 								<f:selectItem itemLabel="Normal" itemValue="Normal" />
@@ -186,18 +190,9 @@
 							<p:inputText id="peso" value="#{terneroControl.ternero.peso}"
 								required="true" />
 						</div>
-						<div class="p-formgrid p-grid">
-							<div class="p-field p-col">
-								<p:outputLabel for="price">Sexo</p:outputLabel>
-								<p:inputText id="price" value="#{terneroControl.ternero.valor}" />
-							</div>
-							<div class="p-field p-col">
-								<p:outputLabel for="quantity">Guachera</p:outputLabel>
-								<p:spinner id="quantity" min="0"
-									value="#{terneroControl.ternero.parto}" />
-							</div>
-						</div>
-
+						
+							
+	
 						<p:divider align="center">
 							<span class="ui-tag">Calostrado</span>
 						</p:divider>
@@ -217,17 +212,17 @@
 						<p:inputText id="valor" value="#{terneroControl.ternero.valor}"
 							required="true" />
 							
-							<p:outputLabel for="valor">Fecha</p:outputLabel>
-							<p:calendar id="name"
-								value="#{terneroControl.ternero.fechaRef}" required="false" showon="button" />
+							<p:outputLabel for="fechaF">Fecha</p:outputLabel>
+							<p:datePicker  id="fechaF"
+								value="#{terneroControl.ternero.fechaRef}" required="false"/>
 							
 
 						<p:divider align="center">
 							<span class="ui-tag">Desleche</span>
 							
 						</p:divider>
-							<p:outputLabel for="valor">Fecha</p:outputLabel>
-							<p:inputText id="valor" value="#{terneroControl.ternero.fechaDes}"
+							<p:outputLabel for="fechaDes">Fecha</p:outputLabel>
+							<p:datePicker id="fechaDes" value="#{terneroControl.ternero.fechaDes}"
 							required="true" />
 						<p:outputLabel for="pesodest">Peso(Kg)</p:outputLabel>
 						<p:inputText id="pesodest"
