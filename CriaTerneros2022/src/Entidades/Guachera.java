@@ -26,8 +26,8 @@ public class Guachera implements Serializable {
 	@Column(nullable = false, name= "nroGuachera")	
 	private String nroGuachera;
 	
-	private String individual;
-    private String colectiva;
+	private String tipoGuachera;
+	private String observaciones;
     
 
     
@@ -35,24 +35,26 @@ public class Guachera implements Serializable {
     }
    
 
-    public Guachera(int id, String nroGuachera, String individual, String colectiva) {
+    public Guachera(int id, String nroGuachera, String tipoGuachera, String observaciones) {
 		super();
 		this.id = id;
 		this.nroGuachera= nroGuachera;
-		this.individual = individual;
-		this.colectiva = colectiva;
+		this.tipoGuachera = tipoGuachera;
+		this.observaciones = observaciones;
 	}
 
 
 
 	@Override
     public Guachera clone() {
-        return new Guachera(getId(), getnroGuachera(), getindividual(), getcolectiva());
+        return new Guachera(getId(), getnroGuachera(), getTipoGuachera(), getObservaciones());
     }
 
 	
 	
    
+	
+
 	public int getId() {
 		return id;
 	}
@@ -73,35 +75,29 @@ public class Guachera implements Serializable {
 		}
 
 
-	public String getindividual() {
-		return individual;
-	}
-
-
-
-	public void setindividual(String individual) {
-		this.individual = individual;
-	}
-
-
-
-	public String getcolectiva() {
-		return colectiva;
-	}
-
-
-
-	public void setcolectiva(String colectiva) {
-		this.colectiva = colectiva;
-	}
-
-
 
 
 
 	
 
+		public String getTipoGuachera() {
+			return tipoGuachera;
+		}
 
+
+		public void setTipoGuachera(String tipoGuachera) {
+			this.tipoGuachera = tipoGuachera;
+		}
+
+
+		public String getObservaciones() {
+			return observaciones;
+		}
+
+
+		public void setObservaciones(String observaciones) {
+			this.observaciones = observaciones;
+		}
 
 
 	@Override

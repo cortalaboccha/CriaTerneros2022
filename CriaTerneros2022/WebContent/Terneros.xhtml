@@ -163,15 +163,21 @@
 							<span class="ui-tag">Nacimiento</span>
 						</p:divider>
 						<div class="p-field">
+							<p:outputLabel for="imagen">Imagen</p:outputLabel>
+							<p:inputText id="imagen"
+								value="#{terneroControlNamed.selectedTernero.imagen}" required="false" />
+						
+						</div>
+						<div class="p-field">
 							<p:outputLabel for="name">Nro Ternero</p:outputLabel>
 							<p:inputText id="name"
-								value="#{terneroControl.ternero.nroTernero}" required="false" />
+								value="#{terneroControlNamed.selectedTernero.nroTernero}" required="false" />
 						
 						</div>
 						 <div class="p-field p-col-12 p-md-4">
                 <p:outputLabel for="fechaN" >Fecha Nacimiento</p:outputLabel>
                 
-							<p:calendar id="fechaNac" value="#{terneroControl.ternero.fechaNac}"
+							<p:calendar id="fechaN" value="#{terneroControlNamed.selectedTernero.fechaNac}"
 				navigator="true" pattern="dd/MM/yyyy" required="true"
 				requiredMessage="***Fecha de Nacimiento es requerida***"
 				readonlyInput="true" showOn="button" title="Fecha Nacimiento"></p:calendar>
@@ -179,7 +185,7 @@
 						<div class="p-field">
 							<p:outputLabel for="parto">Parto</p:outputLabel>
 							<p:selectOneRadio id="parto"
-								value="#{terneroControl.ternero.parto}" layout="responsive"
+								value="#{terneroControlNamed.selectedTernero.parto}" layout="responsive"
 								columns="2">
 								<f:selectItem itemLabel="Normal" itemValue="Normal" />
 								<f:selectItem itemLabel="Asistido" itemValue="Asistido" />
@@ -187,7 +193,7 @@
 						</div>
 						<div>
 							<p:outputLabel for="peso">Peso(Kg)</p:outputLabel>
-							<p:inputText id="peso" value="#{terneroControl.ternero.peso}"
+							<p:inputText id="peso" value="#{terneroControlNamed.selectedTernero.peso}"
 								required="true" />
 						</div>
 						
@@ -198,10 +204,10 @@
 						</p:divider>
 						<p:outputLabel for="cantidad">Cantidad(L)</p:outputLabel>
 						<p:inputText id="cantidad"
-							value="#{terneroControl.ternero.cantCal}" required="true" />
+							value="#{terneroControlNamed.selectedTernero.cantCal}" required="true" />
 
 						<p:outputLabel for="tiempo">Tiempo/Nacimiento</p:outputLabel>
-						<p:inputText id="tiempo" value="#{terneroControl.ternero.tiempo}"
+						<p:inputText id="tiempo" value="#{terneroControlNamed.selectedTernero.tiempo}"
 							required="true" />
 
 						<p:divider align="center">
@@ -209,12 +215,12 @@
 						</p:divider>
 
 						<p:outputLabel for="valor">Valor</p:outputLabel>
-						<p:inputText id="valor" value="#{terneroControl.ternero.valor}"
+						<p:inputText id="valor" value="#{terneroControlNamed.selectedTernero.valor}"
 							required="true" />
 							
 							<p:outputLabel for="fechaF">Fecha</p:outputLabel>
 							<p:datePicker  id="fechaF"
-								value="#{terneroControl.ternero.fechaRef}" required="false"/>
+								value="#{terneroControlNamed.selectedTernero.fechaRef}" required="false"/>
 							
 
 						<p:divider align="center">
@@ -222,13 +228,13 @@
 							
 						</p:divider>
 							<p:outputLabel for="fechaDes">Fecha</p:outputLabel>
-							<p:datePicker id="fechaDes" value="#{terneroControl.ternero.fechaDes}"
+							<p:datePicker id="fechaDes" value="#{terneroControlNamed.selectedTernero.fechaDes}"
 							required="true" />
 						<p:outputLabel for="pesodest">Peso(Kg)</p:outputLabel>
 						<p:inputText id="pesodest"
-							value="#{terneroControl.ternero.pesoDes}" required="true" />
+							value="#{terneroControlNamed.selectedTernero.pesoDes}" required="true" />
 						<p:outputLabel for="altura">Altura</p:outputLabel>
-						<p:inputText id="altura" value="#{terneroControl.ternero.altura}"
+						<p:inputText id="altura" value="#{terneroControlNamed.selectedTernero.altura}"
 							required="true" />
 
 
@@ -240,7 +246,7 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Guardar" icon="pi pi-check"
-						actionListener="#{terneroControlNamed.Crear()}"
+						actionListener="#{terneroControlNamed.crear()}"
 						update="manage-Ternero-content"
 						process="manage-Ternero-content @this" />
 					<p:commandButton value="Cancelar" icon="pi pi-times"
@@ -254,7 +260,7 @@
 				width="300" message="Eliminar este Ternero?" header="Confirmar"
 				severity="warn">
 				<p:commandButton value="Sí" icon="pi pi-check"
-					actionListener="#{terneroControlNamed.deleteTernero}"
+					actionListener="#{terneroControlNamed.eliminar()}"
 					process="@this" oncomplete="PF('deleteTerneroDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"

@@ -106,7 +106,7 @@ public class TerneroControl implements Serializable {
 				this.terneroEJB.editar(this.selectedTernero);
 				this.selectedTernero= null;
 				PrimeFaces.current().executeScript("PF('manageTerneroDialog').hide()");
-		        PrimeFaces.current().ajax().update("form:messages", "form");
+		        PrimeFaces.current().ajax().update("form:dt-Terneros");
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ternero editado"));
 				
 			} catch (Exception e) {

@@ -4,11 +4,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<link rel="stylesheet" href="principal2.css"></link>
+
+<link rel="stylesheet" href="principal2.css"></link>
 
 <h:head>
-<title>Guacheras</title>
+	<title>Guacheras</title>
 </h:head>
 <body>
 	<h:form id="form">
@@ -18,17 +18,19 @@
 			<p:toolbar>
 				<p:toolbarGroup>
 					<p:commandButton value="Nuevo" icon="pi pi-plus"
-						actionListener="#{crudViewG.openNew}"
+						actionListener="#{guacheraControlNamed.openNew}"
 						update=":form:manage-Guachera-content"
 						oncomplete="PF('manageGuacheraDialog').show()"
 						styleClass="ui-button-success" style="margin-right: .5rem">
 						<p:resetInput target=":form:manage-Guachera-content" />
 					</p:commandButton>
 					<p:commandButton id="delete-Guacheras-button"
-						value="#{crudViewG.deleteButtonMessage}" icon="pi pi-trash"
-						actionListener="#{crudViewG.deleteSelectedGuacheras}"
+						value="#{guacheraControlNamed.deleteButtonMessage}"
+						icon="pi pi-trash"
+						actionListener="#{guacheraControlNamed.eliminar()}"
 						styleClass="ui-button-danger"
-						disabled="#{!crudViewG.hasSelectedGuacheras()}" update="@this">
+						disabled="#{!guacheraControlNamed.hasSelectedGuacheras()}"
+						update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected Guacheras?"
 							icon="pi pi-exclamation-triangle" />
@@ -45,16 +47,17 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-<br></br>
+			<br></br>
 
-			<p:dataTable id="dt-Guacheras" widgetVar="dtGuacherasGuacheras" var="Guachera"
-				value="#{crudViewG.guacheras}" reflow="true"
-				styleClass="Guacheras-table" selection="#{crudViewG.selectedGuacheras}"
-				rowKey="#{Guachera.id}" paginator="true" rows="10"
-				rowSelectMode="add" paginatorPosition="bottom">
+			<p:dataTable id="dt-Guacheras" widgetVar="dtGuacheras" var="t"
+				value="#{guacheraControlNamed.guacheras}" reflow="true"
+				styleClass="Guacheras-table"
+				selection="#{guacheraControlNamed.selectedGuachera}"
+				rowKey="#{t.id}" paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
 				<f:facet name="header">
 					<div class="Guacheras-table-header">
-						<span style="font-weight: bold">GUACHERAS	</span> <span
+						<span style="font-weight: bold">GUACHERAS </span> <span
 							class="filter-container ui-input-icon-left"> <i
 							class="pi pi-search"></i> <p:inputText id="globalFilter"
 								onkeyup="PF('dtGuacheras').filter()" placeholder="Buscar" />
@@ -71,21 +74,25 @@
 					update=":form:delete-Guacheras-button" />
 				<p:ajax event="toggleSelect" update=":form:delete-Guacheras-button" />
 
-				<p:column selectionMode="multiple" exportable="false"></p:column>
+				
 
-				<p:column headerText="Nro Guachera" sortBy="#{Guachera.nroGuachera}"
-					filterBy="#{Guachera.nroGuachera}">
-					<h:outputText value="#{Guachera.nroGuachera}" />
+				<p:column headerText="Nro Guachera" sortBy="#{t.nroGuachera}"
+					filterBy="#{t.nroGuachera}">
+					<h:outputText value="#{t.nroGuachera}" style= "font-weight: 700"/>
 				</p:column>
-				 
-				<p:column headerText="Individual" exportable="false">
-					<h:outputText value="#{Guachera.individual}" />
+
+				<p:column headerText="Tipo Guacheral" exportable="false">
+					<h:outputText value="#{t.tipoGuachera}" style="font-weight: 700">
+					</h:outputText>"
 				</p:column>
-				
-				<p:column headerText="Colectiva" exportable="false">
-					<h:outputText value="#{Guachera.colectiva}" />
+
+
+
+				<p:column headerText="Observaciones" exportable="false">
+					<h:outputText value="#{t.observaciones}" style="font-weight: 700">
+					</h:outputText>"
 				</p:column>
-				
+
 
 				<p:column exportable="false">
 					<p:commandButton icon="pi pi-pencil"
@@ -94,14 +101,14 @@
 						styleClass="edit-button rounded-button ui-button-success"
 						process="@this">
 						<f:setPropertyActionListener value="#{Guachera}"
-							target="#{crudViewG.selectedGuachera}" />
+							target="#{guacheraControlNamed.selectedGuachera}" />
 						<p:resetInput target=":form:manage-Guachera-content" />
 					</p:commandButton>
 					<p:commandButton class="ui-button-warning rounded-button"
 						icon="pi pi-trash" process="@this"
 						oncomplete="PF('deleteGuacheraDialog').show()">
 						<f:setPropertyActionListener value="#{Guachera}"
-							target="#{crudViewG.selectedGuachera}" />
+							target="#{guacheraControlNamed.selectedGuachera}" />
 					</p:commandButton>
 				</p:column>
 
@@ -116,34 +123,36 @@
     max-height: 80%;">
 				<p:outputPanel id="manage-Guachera-content" class="ui-fluid">
 
-					<p:outputPanel rendered="#{not empty crudViewG.selectedGuachera}">
+					<p:outputPanel
+						rendered="#{not empty guacheraControlNamed.selectedGuachera}">
 
 						<p:divider align="center">
 							<span class="ui-tag">Nacimiento</span>
 						</p:divider>
 						<div class="p-field">
-							<p:outputLabel for="name">Nro Guachera</p:outputLabel>
-							<p:inputText id="name" value="#{crudViewG.selectedGuachera.nroGuachera}"
+							<p:outputLabel for="numero">Nro Guachera</p:outputLabel>
+							<p:inputText id="numero"
+								value="#{guacheraControlNamed.selectedGuachera.nroGuachera}"
 								required="true" />
 						</div>
 
-						
+
 
 						<div class="p-field">
-							<p:outputLabel for="indi">Individual</p:outputLabel>
-							<p:selectOneRadio id="indi" layout="responsive" columns="2">
-								<f:selectItem itemLabel="Estaca" itemValue="Estaca" />
-								<f:selectItem itemLabel="Jaula" itemValue="Jaula" />
+							<p:outputLabel for="indi">Tipo Guachera</p:outputLabel>
+							<p:selectOneRadio id="indi" layout="responsive" columns="1" value="#{guacheraControlNamed.selectedGuachera.tipoGuachera}">
+								<f:selectItem itemLabel="Individual - Estaca" itemValue="Individual - Estaca" />
+								<f:selectItem itemLabel="Individual - Jaula" itemValue="Individual - Jaula" />
+								<f:selectItem itemLabel="Colectiva - Galpon" itemValue="Colectiva - Galpon" />
 							</p:selectOneRadio>
 						</div>
 						
 						<div class="p-field">
-							<p:outputLabel for="cole">Colectiva</p:outputLabel>
-							<p:selectOneRadio id="cole" layout="responsive" columns="2">
-								<f:selectItem itemLabel="Galpon" itemValue="Galpon" />
-							</p:selectOneRadio>
+						<p:outputLabel for="obs">Observaciones</p:outputLabel>
+					<p:inputTextarea id="obs" rows="6" cols="33" value="#{guacheraControlNamed.selectedGuachera.observaciones}"/>
 						</div>
-						
+
+
 
 					</p:outputPanel>
 				</p:outputPanel>
@@ -151,7 +160,7 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Guardar" icon="pi pi-check"
-						actionListener="#{crudViewG.saveGuachera}"
+						actionListener="#{guacheraControlNamed.crear()}"
 						update="manage-Guachera-content"
 						process="manage-Guachera-content @this" />
 					<p:commandButton value="Cancelar" icon="pi pi-times"
@@ -165,8 +174,8 @@
 				width="300" message="Eliminar este Guachera?" header="Confirmar"
 				severity="warn">
 				<p:commandButton value="Sí" icon="pi pi-check"
-					actionListener="#{crudViewG.deleteGuachera}" process="@this"
-					oncomplete="PF('deleteGuacheraDialog').hide()" />
+					actionListener="#{guacheraControlNamed.eliminar()}"
+					process="@this" oncomplete="PF('deleteGuacheraDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"
 					onclick="PF('deleteGuacheraDialog').hide()" />
@@ -179,17 +188,18 @@
 					styleClass="ui-confirmdialog-no ui-button-secondary"
 					icon="pi pi-times" />
 			</p:confirmDialog>
-			
+
 			<br></br>
 			<p:toolbar>
 				<p:toolbarGroup>
-					<p:commandButton value="Atrás" icon="pi pi-undo" action="CriaT.xhtml"
-						styleClass="ui-button-secondary" style="margin-right: .5rem">
+					<p:commandButton value="Atrás" icon="pi pi-undo"
+						action="CriaT.xhtml" styleClass="ui-button-secondary"
+						style="margin-right: .5rem">
 					</p:commandButton>
 
 				</p:toolbarGroup>
 			</p:toolbar>
-			
+
 		</div>
 	</h:form>
 </body>
