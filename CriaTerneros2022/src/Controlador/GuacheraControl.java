@@ -116,6 +116,8 @@ private static final long serialVersionUID = 1L;
 	}
 
 	public void eliminar() {
+		
+		
 		try {
 			this.guacheraEJB.remove(this.selectedGuachera);
 			this.selectedGuachera = null;
