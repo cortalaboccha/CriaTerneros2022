@@ -57,6 +57,7 @@ private static final long serialVersionUID = 1L;
 
 	public Guachera getGuachera() {
 		return Guachera;
+		
 	}
 
 	public void setGuachera(Guachera Guachera) {
